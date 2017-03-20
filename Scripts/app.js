@@ -106,4 +106,7 @@ switch (document.title) {
 
         copyright.textContent = copyrightContent;
 
+    // calling the Start function when the window loads
+    window.onload = Start;
+
 })(); // end of IIFE
