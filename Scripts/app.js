@@ -8,6 +8,29 @@
 console.log(`App Started`);
 console.info(`${document.title}`);
 
+    // initiating the Start function
+    function Start() {
+        PageContent();
+        Copyright();
+    }
+
+    // initiating the Pages and their content
+    function PageContent() {
+        switch (document.title) {
+            case "Cassidy Ho - Home":
+                HomePage();
+                break;
+
+            case "Cassidy Ho - Projects":
+                ProjectsPage();
+                break;
+
+            case "Cassidy Ho - Contact Me":
+                ContactPage();
+                break;
+        }
+    }
+
 switch (document.title) {
     case "Cassidy Ho - Home":
 
