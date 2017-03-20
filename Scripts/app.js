@@ -113,44 +113,67 @@
         });
     }
 
-    case "Cassidy Ho - Contact Me":
+    function ContactPage() {
+        // CONTACT PAGE
+        // FOR <H1> TAG
+        let data = {};
 
-    // CONTACT PAGE
-    // FOR <H1> TAG
-    let contactme = document.getElementById("contactme");
+        let XHR = new XMLHttpRequest();
 
-    let contactmeContent = "Contact Me";
+        XHR.open("GET", "../paragraph.json", true);
 
-    contactme.textContent = contactmeContent;
+        XHR.send(null);
 
-    // GETTING INPUTS FROM USER
-    let fname = document.getElementById("fname");
-    let lname = document.getElementById("lname");
-    let email = document.getElementById("email");
-    let message = document.getElementById("message");
-    let submitButton = document.getElementById("submit");
+        XHR.onreadystatechange = function () {
+            if ((this.readyState === 4) && (this.status === 200)) {
+                data = JSON.parse(this.responseText);
+            }
+        };
 
-    // DISPLAYING INPUTS FROM USER ONTO CONSOLE
-    submitButton.addEventListener("click", function (event) {
-        event.preventDefault();
+        XHR.addEventListener("load", function () {
+            let contactMe = document.getElementById("contactMe");
 
-        console.log(fname.value);
-        console.log(lname.value);
-        console.log(email.value);
-        console.log(message.value);
-    })
+            data.contact.forEach(function (contact) {
+                // DISPLAY CONTACT ME HEADING
+                let contactH1 = document.createElement("h1");
 
-    break;
+                contactH1.innerHTML = `<h1>${contact.contactMe}</h1>`;
 
-}
-    // COPYRIGHT
+                contactMe.appendChild(contactH1);
+            }, this);
+
+        });
+
+        // GETTING INPUTS FROM USER
+        let fname = document.getElementById("fname");
+        let lname = document.getElementById("lname");
+        let email = document.getElementById("email");
+        let message = document.getElementById("message");
+        let submitButton = document.getElementById("submit");
+
+        // DISPLAYING INPUTS FROM USER ONTO CONSOLE
+        submitButton.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            console.log(fname.value);
+            console.log(lname.value);
+            console.log(email.value);
+            console.log(message.value);
+        })
+
+    }
+
+    function Copyright() {
+        // COPYRIGHT
         let copyright = document.getElementById("copyright");
 
-let copyrightContent = "Copyright © 2017 by Cassidy Ho";
+        let copyrightContent = "Copyright © 2017 by Cassidy Ho";
 
-copyright.textContent = copyrightContent;
+        copyright.textContent = copyrightContent;
+    }
 
-// calling the Start function when the window loads
-window.onload = Start;
+
+    // calling the Start function when the window loads
+    window.onload = Start;
 
 })(); // end of IIFE
