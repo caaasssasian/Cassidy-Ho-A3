@@ -61,31 +61,57 @@
         });
     }
 
-    case "Cassidy Ho - Projects":
+    function ProjectsPage() {
+        // PROJECTS PAGE
+        // NUTELLA IMAGES & DESCRIPTION
+        let data = {};
 
-    // PROJECTS PAGE
-    // NUTELLA IMAGES & DESCRIPTION
-    let nutella = document.getElementById("nutellaWebsite");
+        let XHR = new XMLHttpRequest();
 
-    let nutellaDetails = "This is a Nutella Website I created in my 'COMP1002 - Web and Internet Fundamentals' class. The goal was to create a website of an existing brand. I chose Nutella because it's my most favourite spread. I believe I've built a decent looking design with functional links and forms. I've incorporated the colours of the Nutella jar and I think I've distributed the colours well.";
+        XHR.open("GET", "../paragraph.json", true);
 
-    nutella.textContent = nutellaDetails;
+        XHR.send(null);
 
-    // TRAVEL IMAGE & DESCRIPTION
-    let travel = document.getElementById("travelWebsite");
+        XHR.onreadystatechange = function () {
+            if ((this.readyState === 4) && (this.status === 200)) {
+                data = JSON.parse(this.responseText);
+            }
+        };
 
-    let travelDetails = "I've designed this Travel/Photography home page in my 'COMP1051 - Design Principles' class. The objective was to design a home page of your business. We had to incorporate the principles we learned in class to our home page such as balance, emphasis, space, typography, colour modes/schemes, and etc. With the mindset of travelling, I used a gradient of white and blue, the plane in the background creates an implied line towards the 'Contact' link and 'Book Your Appointment' link (which also has a royal blue book for emphasis as the call-to-action).";
+        XHR.addEventListener("load", function () {
+            // NUTELLA PARAGRAPH
+            let nutella = document.getElementById("nutellaWebsite");
 
-    travel.textContent = travelDetails;
+            // TRAVEL PARAGRAPH
+            let travel = document.getElementById("travelWebsite");
 
-    // NAPOLEON DYNAMITE POSTER & DESCRIPTION
-    let napoleon = document.getElementById("napoleonPoster");
+            // NAPOLEON PARAGRAPH
+            let napoleon = document.getElementById("napoleonPoster");
 
-    let napoleonDetails = "In 'COMP1002 - Web and Internet Fundamentals' class, we were suppose to replace the text in a movie poster with only HTML. I chose to do the 'Napoleon Dynamite' movie poster and I believe I did a good job in creating a copy of the movie poster. I've also created a mini website showcasing the description of the movie, the link to the poster and reivews.";
+            data.project.forEach(function (project) {
+                // DISPLAY NUTELLA PARAGRAPH
+                let nutellaRow = document.createElement("p");
 
-    napoleon.textContent = napoleonDetails;
+                nutella.innerHTML = `<p>${project.nutellaParagraph}</p>`;
 
-    break;
+                nutellaWebsite.appendChild(nutellaRow);
+
+                // DISPLAY TRAVEL PARAGRAPH
+                let travelRow = document.createElement("p");
+
+                travelRow.innerHTML = `<p>${project.travelParagraph}</p>`;
+
+                travelWebsite.appendChild(travelRow);
+
+                // DISPLAY NAPOLEON PARAGRAPH
+                let napoleonRow = document.createElement("p");
+
+                napoleon.innerHTML = `<p>${project.napoleonParagraph}</p>`;
+
+                napoleonPoster.appendChild(napoleonRow);
+            }, this);
+        });
+    }
 
     case "Cassidy Ho - Contact Me":
 
